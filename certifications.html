@@ -1,0 +1,15 @@
+<h2>Certifications:</h2>
+<ul>
+    {% for certification in content %}
+        <li>
+            {{ certification.text }}
+            {% if certification.dates %}
+                <span class="dates">
+                    {% for date in certification.dates %}
+                        {{ date }}{% if not loop.last %} - {% endif %}
+                    {% endfor %}
+                </span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

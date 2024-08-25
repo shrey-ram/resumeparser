@@ -1,0 +1,15 @@
+<h2>Education:</h2>
+<ul>
+    {% for education in content %}
+        <li>
+            {{ education }}
+            {% if education.dates %}
+                <span class="dates">
+                    {% for date in education.dates %}
+                        {{ date }}{% if not loop.last %} - {% endif %}
+                    {% endfor %}
+                </span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

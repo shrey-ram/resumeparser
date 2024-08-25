@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - {{ name }}</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background-color: #f4f4f4; 
+        }
+        h1, h2, h3 { 
+            color: #333; 
+        }
+        h1 { 
+            text-align: center; 
+            margin-bottom: 30px; 
+        }
+        .section { 
+            margin-bottom: 20px; 
+            background: #fff; 
+            padding: 15px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+        }
+        .section h2 { 
+            border-bottom: 2px solid #333; 
+            padding-bottom: 5px; 
+            margin-bottom: 10px; 
+        }
+        .workplace { 
+            font-weight: bold; 
+        }
+        .points { 
+            margin-left: 20px; 
+        }
+        .education-item { 
+            font-weight: bold; 
+        }
+        .project-title { 
+            font-weight: bold; 
+            margin-bottom: 10px; /* Adds space below the title */
+        }
+        .project-description { 
+            margin-left: 0; /* Remove margin if you don't want indentation */
+            padding-left: 0; /* Remove padding if you don't want indentation */
+        }
+        .container { 
+            width: 90%; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        ul {
+            list-style: none; /* Removes bullet points from lists */
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ name }}</h1>
+        <div class="section">
+            <h2>Contact Information</h2>
+            <p>{{ contact_info | join('<br>') | safe }}</p>
+        </div>
+        {% for section, content in sections.items() %}
+        <div class="section">
+            <h2>{{ section }}</h2>
+            {% if section == "Skills" %}
+                <ul>
+                    {% for item in content %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            {% elif section == "Education" %}
+                <ul>
+                    {% for item in content %}
+                        <li class="education-item">{{ item.workplace }}</li>
+                    {% endfor %}
+                </ul>
+            {% elif section == "Certifications" %}
+                <ul>
+                    {% for item in content %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            {% elif section == "Projects" %}
+                {% for project in content %}
+                    <div>
+                        <div class="project-title">{{ project.workplace }}</div>
+                        <div class="project-description">
+                            {% for desc in project.points %}
+                                <p>{{ desc }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% for entry in content %}
+                    {% if section == "Professional Experience" %}
+                        <div>
+                            <div class="workplace">{{ entry.workplace }}</div>
+                            <ul class="points">
+                                {% for point in entry.points %}
+                                    <li>{{ point }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% else %}
+                        <div>{{ entry }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
