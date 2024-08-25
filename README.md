@@ -5,4 +5,5 @@ It currently accepts your resume in .docx format and converts it into a html tem
 To run this application on your machine, clone this repo locally and run the following commands after navigating to the directory:
 
 pip install requirements.txt
+
 streamlit run app.py
