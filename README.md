@@ -7,3 +7,5 @@ To run this application on your machine, clone this repo locally and run the fol
 pip install requirements.txt
 
 streamlit run app.py
+
+Time to deploy
