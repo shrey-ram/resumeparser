@@ -22,3 +22,5 @@ pip install requirements.txt
 
 >>>>>>> origin/master
 streamlit run app.py
+
+Time to deploy
